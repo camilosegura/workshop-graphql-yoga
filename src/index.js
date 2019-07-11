@@ -74,6 +74,11 @@ const resolvers = {
     createUsers: async (_, args, ctx) => {
       const { users } = args;
       const { models: { User } } = ctx;
+
+      if (!users.length) {
+        throw new Error('There is not users');
+      }
+
       const uniqsArray = uniqBy(users, 'email');
 
       if (uniqsArray.length !== users.length) {
