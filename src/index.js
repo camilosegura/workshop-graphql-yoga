@@ -3,7 +3,9 @@ import { GraphQLServer } from 'graphql-yoga'
 // const { GraphQLServer } = require('graphql-yoga')
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { uniqBy } from 'lodash';
 import userModel from './user.model';
+
 
 dotenv.config('');
 
@@ -34,7 +36,7 @@ type Query {
 type Mutation {
   hello(name: String!): Boolean!
   createUser(name: String!, email: String!): User!
-  createUsers(users: [UserInput]): [User]!
+  createUsers(users: [UserInput!]!): [User]!
 }
 `
 
@@ -72,6 +74,12 @@ const resolvers = {
     createUsers: async (_, args, ctx) => {
       const { users } = args;
       const { models: { User } } = ctx;
+      const uniqsArray = uniqBy(users, 'email');
+
+      if (uniqsArray.length !== users.length) {
+        throw new Error('The email is repeated');
+      }
+
       const emails = users.map(user => user.email);
       const userExist = await User.exists({ email: { $in: emails } });
 
