@@ -1,0 +1,1 @@
+export const idResolver = (root) => root.id;

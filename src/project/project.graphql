@@ -1,0 +1,25 @@
+enum Team {
+  UI
+  QA
+  DESIGN
+  ADMIN
+}
+type Project {
+  id: ID!
+  name: String!
+  description: String
+  team: Team!
+}
+input ProjectInput {
+  name: String!
+  description: String
+  team: Team!
+}
+
+type Query {
+  projects: [Project]
+}
+
+type Mutation {
+  createProject(project: ProjectInput!): Project!
+}
