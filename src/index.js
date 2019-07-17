@@ -7,6 +7,7 @@ import {
   models,
   typeDefs,
   resolvers,
+  loaders,
 } from './graphql';
 
 dotenv.config('');
@@ -22,6 +23,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD
       context: {
         models,
         db,
+        loaders,
       },
     })
     server.start({ port }, () => console.log('Server is running on localhost:4000'))

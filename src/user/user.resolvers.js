@@ -53,6 +53,11 @@ const resolvers = {
   },
   User: {
     id: idResolver,
+    projects: async ({ id }, _, ctx) => {
+      const { loaders: { projects } } = ctx;
+      
+      return projects.load(id);;
+    },
   },
 }
 

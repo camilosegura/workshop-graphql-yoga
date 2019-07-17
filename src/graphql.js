@@ -1,11 +1,16 @@
-import userModel from './user/user.model';
-import projectModel from './project/project.model';
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+import userModel from './user/user.model';
+import projectModel from './project/project.model';
+import projectLoader from './project/project.loader';
 
 const models = {
   User: userModel,
   Project: projectModel,
+};
+
+const loaders = {
+  projects: projectLoader(),
 };
 
 const typeDefs = mergeTypes(
@@ -21,4 +26,5 @@ export {
   models,
   typeDefs,
   resolvers,
+  loaders,
 }
