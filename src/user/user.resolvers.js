@@ -3,10 +3,6 @@ import { idResolver } from '../utils';
 
 const resolvers = {
   Query: {
-    user: () => ({
-      name: 'Camilo',
-      email: 'camilo@camilo.com'
-    }),
     users: async (_, __, ctx) => {
       const { models: { User } } = ctx;
 

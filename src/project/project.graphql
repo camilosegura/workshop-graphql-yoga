@@ -9,6 +9,7 @@ type Project {
   name: String!
   description: String
   team: Team!
+  users: [User]
 }
 input ProjectInput {
   name: String!
@@ -22,4 +23,5 @@ type Query {
 
 type Mutation {
   createProject(project: ProjectInput!): Project!
+  addUserToProject(projectId: ID!, userId: ID!): Project!
 }

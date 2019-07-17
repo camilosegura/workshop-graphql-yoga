@@ -10,7 +10,6 @@ input UserInput {
 }
 
 type Query {
-  user: User!
   users: [User]
 }
 
